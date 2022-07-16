@@ -1,0 +1,633 @@
+  import React from "react";
+import './Login.scss'
+export const Login = () => {
+  return (
+    <div className="Login bg-light" >
+        <div className="wrapper">
+
+      <div className="left ">
+        <h1 >Himawari</h1>
+        <p >Connect with friends and the world around you on Himawari</p>
+      </div>
+      <div className="right ">
+        <div className="form ">
+          <input type="email" name="email" placeholder="Email" className="form-control my-3" />
+          <input type="password" name="password" placeholder="Password" className="form-control my-3" />
+          <button className="btn btn-light py-2">Log In</button>
+          <a href="##" className="my-3"> Forget Password?</a>
+          <button className="btn btn2">Create a New Account</button>
+        </div>
+      </div>
+    </div>
+        </div>
+  );
+};
+
+
+
+
+
+
+
+
+
+src/Pages/Login/Signup.jsx
+import React from "react";
+import './Login.scss'
+export const Signup = () => {
+  return (
+    <div className="Login bg-light" >
+        <div className="wrapper">
+
+      <div className="left ">
+        <h1 >Himawari</h1>
+        <p >Connect with friends and the world around you on Himawari</p>
+      </div>
+      <div className="right ">
+        <div className="form ">
+        <input type="text" name="username" placeholder="Username" className="form-control my-3" />
+
+          <input type="email" name="email" placeholder="Email" className="form-control my-3" />
+          <input type="password" name="password" placeholder="Password" className="form-control my-3" />
+          <input type="password" name="password2" placeholder="Re-Enter Password" className="form-control my-3" />
+          {/* <button className="btn btn-light py-2">Log In</button> */}
+          {/* <a href="##" className="my-3"> Forget Password?</a> */}
+          <button className="btn btn2 py-2">Create a New Account</button>
+        </div>
+      </div>
+    </div>
+    </div>
+  );
+};
+
+
+
+
+
+
+
+src/Pages/Profile/Profile.jsx
+import React from "react";
+import "./Profile.scss";
+import { Sidebar } from "./../../components/Sidebar/Sidebar";
+import { NewPost } from "../../components/NewPost/NewPost";
+import { Posts } from "../../dummyData";
+import { Post } from "../../components/Post/Post";
+import { Users } from "../../dummyData";
+export const Profile = () => {
+  return (
+    <div className="Profile">
+      <div className="left">
+        <Sidebar />
+      </div>
+      <div className="right">
+        <div className="topProfile">
+          <img className="userCover" src="assets/imgs/post/1.jpeg" alt="" />
+          <div className="userData">
+            <span className="whiteCircle">
+              <img src="assets/imgs/person/1.jpeg" alt="" />
+            </span>
+            <span className="name">Safak Ddfgkdjfg</span>
+            <span className="bio">Hello Bitches</span>
+          </div>
+        </div>
+        <div className="buttom">
+          <div className="left">
+            <NewPost />
+            {Posts.map((elm) => (
+              <Post
+                key={elm.id}
+                desc={elm.desc}
+                photo={elm.photo}
+                date={elm.date}
+                userId={elm.userId}
+                like={elm.like}
+                comment={elm.comment}
+              />
+            ))}
+          </div>
+          <div className="rightInfo">
+            <div className="part1info">
+              <h5>User Information</h5>
+              <p>
+                <span>City:</span> New York
+              </p>
+              <p>
+                <span>From:</span> Madrid
+              </p>
+              <p>
+                <span>Relationship:</span> Single
+              </p>
+            </div>
+            <div className="part2info">
+              <h5>User Friends</h5>
+              <div className="friends">
+
+              {Users.map((elm) => (
+                  <div className="friend">
+                  <img src={elm.profilePicture} alt="" />
+                  <h6>{elm.username}</h6>
+                </div>
+              ))}
+                {Users.map((elm ,indx) => (
+                  <div className="friend" key={indx}>
+                    <img src={elm.profilePicture} alt="" />
+                    <h6>{elm.username}</h6>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+ 
+ 
+ 
+ 
+ 
+ 
+src/components/Navbar/Navbar.jsx
+import React from "react";
+import React, { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { Search } from "../Search/Search";
+import { BadgeIcon } from "../BadgeIcon/BadgeIcon";
+import PersonIcon from "@mui/icons-material/Person";
+import MessageIcon from "@mui/icons-material/Message";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import { Pallets } from "../../dummyData";
+import "./Navbar.scss";
+export const Navbar = () => {
+  const [pallet, setPallet] = useState(Pallets[0]);
+  return (
+    <div className="Navbar">
+    <div className="Navbar" style={{ backgroundColor: pallet.mainColor }}>
+      <div className="left">
+        <Link to="/">Himawari</Link>
+        <Link to="/" style={{ color: pallet.textColorWithBg }}>
+          Himawari
+        </Link>
+      </div>
+
+      <div className="center">
+        <Search />
+      </div>
+
+      <div className="right">
+        <div className="links">
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/profile">Profile</NavLink>
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/signup">Signup</NavLink>
+          <NavLink style={{ color: pallet.textColorWithBg }} to="/">
+            Home
+          </NavLink>
+          <NavLink style={{ color: pallet.textColorWithBg }} to="/profile">
+            Profile
+          </NavLink>
+          <NavLink style={{ color: pallet.textColorWithBg }} to="/login">
+            Login
+          </NavLink>
+          <NavLink style={{ color: pallet.textColorWithBg }} to="/signup">
+            Signup
+          </NavLink>
+        </div>
+        <div className="icons">
+          <BadgeIcon icon={<PersonIcon />} badgeContent="5" />
+          <BadgeIcon icon={<MessageIcon />} badgeContent="3" />
+          <BadgeIcon icon={<NotificationsIcon />} badgeContent="8" />
+          <BadgeIcon
+            style={{ color: pallet.textColorWithBg }}
+            icon={<PersonIcon />}
+            badgeContent="5"
+          />
+          <BadgeIcon
+            style={{ color: pallet.textColorWithBg }}
+            icon={<MessageIcon />}
+            badgeContent="3"
+          />
+          <BadgeIcon
+            style={{ color: pallet.textColorWithBg }}
+            icon={<NotificationsIcon />}
+            badgeContent="8"
+          />
+        </div>
+        <div className="userImg">
+          <img src="assets/imgs/person/1.jpeg" alt="" />
+        </div>
+      </div>
+    </div>
+  );
+};
+ 
+ 
+ 
+ 
+ 
+ 
+src/components/Navbar/Navbar.scss
+.Navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: crimson;
+    // background-color: crimson;
+    height: 60px;
+    padding: 10px 25px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    .left{
+        flex: 3;
+        a{
+            text-decoration: none;
+            color: white;
+            // color: white;
+            font-size: 30px;
+            font-weight: 500;
+        }
+    }
+    .center{
+        flex: 5;
+        margin: auto 30px;
+    }
+    .right{
+        flex: 4;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        .links{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            a{
+                text-decoration: none;
+                color: white;
+                // color: white;
+                font-weight: 400;
+                margin: auto 10px;
+            }
+        }
+        .icons{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            // color: white;
+        }
+        .userImg{
+            img{
+                height: 42px;
+                width: 42px;
+                border-radius: 50%;
+                // width: 100%;
+                object-fit:cover;
+                cursor: pointer;
+            }
+        }
+    }
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+src/components/NewPost/NewPost.jsx
+import React from "react";
+import React , { useState } from "react";
+import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+import { Pallets } from "../../dummyData";
+
+import "./NewPost.scss";
+export const NewPost = () => {
+  const [pallet, setPallet] = useState(Pallets[0]);
+
+  return (
+    <div className="NewPost">
+      <div className="top">
+        <div className="userImg">
+          <img src="assets/imgs/person/1.jpeg" alt="" />
+        </div>
+        <input type="text" placeholder="What's in your mind Safak?" />
+      </div>
+      <hr />
+      <div className="buttom">
+        <div className="left">
+          <div className="activity">
+            <div className="icon">
+              <PhotoLibraryIcon style={{color:'green'}}/>
+            </div>
+            <div className="label">Photo&#160;or&#160;Video</div>
+            <div className="label" style={{color: pallet.textColorNoBg }}>Photo&#160;or&#160;Video</div>
+          </div>
+          <div className="activity">
+            <div className="icon">
+              <LocalOfferIcon style={{color:'blue'}} />
+            </div>
+            <div className="label">Tag</div>
+            <div className="label" style={{color: pallet.textColorNoBg }}>Tag</div>
+          </div>
+          <div className="activity">
+            <div className="icon">
+              <LocationOnIcon style={{color:'crimson'}} />
+            </div>
+            <div className="label">Location</div>
+            <div className="label" style={{color: pallet.textColorNoBg }}>Location</div>
+          </div>
+          <div className="activity">
+            <div className="icon">
+              <EmojiEmotionsIcon style={{color:'#cdba32'}} />
+            </div>
+            <div className="label">Feeling</div>
+            <div className="label" style={{color: pallet.textColorNoBg }}>Feeling</div>
+          </div>
+        </div>
+        <div className="right">
+          <button className="btn btn-danger">Share</button>
+          <button className="btn" style={{backgroundColor:pallet.mainColor , color: pallet.textColorWithBg }}>Share</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+ 5  
+src/components/Sidebar/Sidebar.jsx
+@@ -1,33 +1,38 @@
+import React from "react";
+import {Users} from '../../dummyData'
+import RssFeedIcon from "@mui/icons-material/RssFeed";
+import CommentIcon from "@mui/icons-material/Comment";
+import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
+import GroupIcon from "@mui/icons-material/Group";
+import BookmarksIcon from "@mui/icons-material/Bookmarks";
+import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import EventIcon from "@mui/icons-material/Event";
+import SchoolIcon from "@mui/icons-material/School";
+import "./Sidebar.scss";
+import { Tab } from "./Tab";
+import { User } from "../User/User";
+export const Sidebar = () => {
+  return (
+    <div className="Sidebar">
+      <Tab icon={<RssFeedIcon />} label="Feed" />
+      <Tab icon={<CommentIcon />} label="Chats" />
+      <Tab icon={<PlayCircleFilledIcon />} label="Videos" />
+      <Tab icon={<GroupIcon />} label="Groups" />
+      <Tab icon={<BookmarksIcon />} label="Bookmarks" />
+      <Tab icon={<HelpOutlineIcon />} label="Questions" />
+      <Tab icon={<WorkOutlineIcon />} label="Jobs" />
+      <Tab icon={<EventIcon />} label="Events" />
+      <Tab icon={<SchoolIcon />} label="Courses" />
+      <button className="btn btn-light">Show&#160;More</button>
+      <hr className="mx-4"/>
+      {Users.map((elm) => <User img={elm.profilePicture} label={elm.username} key={elm.id} status={false} /> )}
+      <hr className="mx-4"/>
+      <span className="btn btn-light mx-1 my-3 facebook">Facebook</span>
+      <span className="btn btn-light mx-1 my-3 insta">Insta</span>
+      <span className="btn btn-light mx-1 my-3 behance">Behance</span>
+      <span className="btn btn-light mx-1 my-3 default">Default</span>
+    </div>
+  );
+};
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+src/components/Sidebar/Sidebar.scss
+.Sidebar {
+    height: calc(100vh - 60px);
+    // height: calc(100vh - 60px);
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    // position: fixed;
+    left: 0;
+    position: fixed;
+    width: 17vw;
+    // position: fixed;
+    // width: 17vw;
+    position: sticky;
+    top: 60px;
+    button {
+        margin: 10px 20px;
+        padding: 5px 20px;
+    }
+    hr {
+        width: 80%;
+    }
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgb(180, 180, 180);
+}
+ 37  
+src/dummyData.js
+@@ -1,51 +1,51 @@
+export const Users = [
+  {
+    id:1,
+    id: 1,
+    profilePicture: "assets/imgs/person/1.jpeg",
+    username: "Safak Kocaoglu",
+  },
+  {
+    id:2,
+    id: 2,
+    profilePicture: "assets/imgs/person/2.jpeg",
+    username: "Janell Shrum",
+  },
+  {
+    id:3,
+    id: 3,
+    profilePicture: "assets/imgs/person/3.jpeg",
+    username: "Alex Durden",
+  },
+  {
+    id:4,
+    id: 4,
+    profilePicture: "assets/imgs/person/4.jpeg",
+    username: "Dora Hawks",
+  },
+  {
+    id:5,
+    id: 5,
+    profilePicture: "assets/imgs/person/5.jpeg",
+    username: "Thomas Holden",
+  },
+  {
+    id:6,
+    id: 6,
+    profilePicture: "assets/imgs/person/6.jpeg",
+    username: "Shirley Beauchamp",
+  },
+  {
+    id:7,
+    id: 7,
+    profilePicture: "assets/imgs/person/7.jpeg",
+    username: "Travis Bennett",
+  },
+  {
+    id:8,
+    id: 8,
+    profilePicture: "assets/imgs/person/8.jpeg",
+    username: "Kristen Thomas",
+  },
+  {
+    id:9,
+    id: 9,
+    profilePicture: "assets/imgs/person/9.jpeg",
+    username: "Gary Duty",
+  },
+  {
+    id:10,
+    id: 10,
+    profilePicture: "assets/imgs/person/10.jpeg",
+    username: "Safak Kocaoglu",
+  },
+];
+export const Posts = [
+  {
+    id: 1,
+    desc: "Love For All, Hatred For None.",
+    photo: "assets/imgs/post/1.jpeg",
+    date: "5 mins ago",
+    userId: 1,
+    like: 32,
+    comment: 9,
+  },
+  {
+    id: 2,
+    photo: "assets/imgs/post/2.jpeg",
+    date: "15 mins ago",
+    userId: 2,
+    like: 2,
+    comment: 1,
+  },
+  {
+    id: 3,
+    desc: "Every moment is a fresh beginning.",
+    photo: "assets/imgs/post/3.jpeg",
+    date: "1 hour ago",
+    userId: 3,
+    like: 61,
+    comment: 2,
+  },
+  {
+    id: 4,
+    photo: "assets/imgs/post/4.jpeg",
+    date: "4 hours ago",
+    userId: 4,
+    like: 7,
+    comment: 3,
+  },
+  {
+    id: 5,
+    photo: "assets/imgs/post/5.jpeg",
+    date: "5 hours ago",
+    userId: 5,
+    like: 23,
+    comment: 5,
+  },
+  {
+    id: 6,
+    photo: "assets/imgs/post/6.jpeg",
+    date: "1 day ago",
+    userId: 6,
+    like: 44,
+    comment: 6,
+  },
+  {
+    id: 7,
+    desc: "Never regret anything that made you smile.",
+    photo: "assets/imgs/post/7.jpeg",
+    date: "2 days ago",
+    userId: 7,
+    like: 52,
+    comment: 3,
+  },
+  {
+    id: 8,
+    photo: "assets/imgs/post/8.jpeg",
+    date: "3 days ago",
+    userId: 8,
+    like: 15,
+    comment: 1,
+  },
+  {
+    id: 9,
+    desc: "Change the world by being yourself.",
+    photo: "assets/imgs/post/9.jpeg",
+    date: "5 days ago",
+    userId: 9,
+    like: 11,
+    comment: 2,
+  },
+  {
+    id: 10,
+    photo: "assets/imgs/post/10.jpeg",
+    date: "1 week ago",
+    userId: 10,
+    like: 104,
+    comment: 12,
+  },
+];
+
+export const Pallets = [
+  {
+    mainColor: "crimson",
+    SecColor: "red",
+    textColorNoBg: "#000",
+    textColorWithBg: "#fff",
+    bodyColor: "#fff",
+  },
+  {
+    mainColor: "blue",
+    SecColor: "lightblue",
+    textColorNoBg: "#000",
+    textColorWithBg: "#fff",
+    bodyColor: "#fff",
+  },
+];
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+src/global.scss
+// 320px — 480px: Mobile devices
+// 481px — 768px: iPads, Tablets
+// 769px — 1024px: Small screens, laptops
+// 1025px — 1200px: Desktops, large screens
+// 1201px and more —  Extra large screens, TV
+// @import "../../../global.scss";
+// @media (max-width: $tablet) {
+//     position: relative;
+// }
+// ------------------------------------
+// colors
+// pallet1 = {mainColor: 'crimson' , SecColor: 'red', textColorNoBg: '#000' ,textColorWithBg: '#fff' , backgroundColor : '#fff'} 
+// ------------------------------------
+$mobile: 480px;
+$tablet: 768px;
+$labtop: 1024px;
+$desktop: 1200px;
